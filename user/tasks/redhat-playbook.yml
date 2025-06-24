@@ -20,8 +20,8 @@
 
 - name: "Passwordless wheel"
   ansible.builtin.lineinfile:
-    path: /etc/wheelers
+    path: /etc/sudoers
     state: present
     regexp: "^%wheel"
     line: "%wheel ALL=(ALL) NOPASSWD:ALL"
-    validate: "viwheel -cf %s"
+    validate: "visudo -cf %s"
