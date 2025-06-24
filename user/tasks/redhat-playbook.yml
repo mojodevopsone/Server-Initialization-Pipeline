@@ -18,6 +18,7 @@
     exclusive: true
     state: present
   loop: "{{ users }}"
+  when: ansible_facts['os_family'] == "Redhat"
 
 - name: "Passwordless wheel"
   ansible.builtin.lineinfile:
