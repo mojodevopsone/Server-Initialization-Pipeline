@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    stages {
+        stage('git') {
+            steps {
+                git credentialsId: 'jenkins-sshkey', url: 'git@github.com:mojodevopsone/ansible-inventory-test.git'
+            }
+        }
+        stage('ansiblePlaybook') {
+            steps {
+                ansiblePlaybook inventory: 'inventory.ini', playbook: 'playbook.yml',''
+
+            }
+        }
+    }
+}
+
+
