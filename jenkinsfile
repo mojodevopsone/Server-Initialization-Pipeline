@@ -8,11 +8,10 @@ pipeline {
         }
         stage('ansiblePlaybook') {
             steps {
-                ansiblePlaybook inventory: 'inventory.ini', playbook: 'playbook.yml',''
+                ansiblePlaybook inventory: 'inventory.ini', playbook: 'playbook.yml'
 
             }
         }
     }
 }
-
 
