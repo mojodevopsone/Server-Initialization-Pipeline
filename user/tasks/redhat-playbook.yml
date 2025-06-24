@@ -3,12 +3,12 @@
 
 - name: "Add user"
   ansible.builtin.user:
-    name: "{{item.name}}"
+    name: "{{ item.name }}"
     shell: "/bin/bash"
     create_home: true
     groups: wheel
     append: true
-  loop: "{{users}}"
+  loop: "{{ users }}"
   when: ansible_facts['os_family'] == "Redhat"
 
 - name: "Inject SSH Key"
@@ -17,7 +17,7 @@
     key: "{{ item.key }}"
     exclusive: true
     state: present
-  loop: "{{users}}"
+  loop: "{{ users }}"
 
 - name: "Passwordless wheel"
   ansible.builtin.lineinfile:
