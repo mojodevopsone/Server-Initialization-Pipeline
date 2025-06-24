@@ -9,7 +9,7 @@
     groups: sudo
     append: true
   loop: "{{users}}"
-
+  when: ansible_facts['os_family'] == "ubuntu"
 - name: "Inject SSH Key"
   ansible.posix.authorized_key:
     user: "{{ item.name }}"
