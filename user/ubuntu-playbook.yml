@@ -1,0 +1,27 @@
+---
+# tasks file for user
+
+- name: "Add user"
+  ansible.builtin.user:
+    name: "{{item.name}}"
+    shell: "/bin/bash"
+    create_home: true
+    groups: sudo
+    append: true
+  loop: "{{users}}"
+
+- name: "Inject SSH Key"
+  ansible.posix.authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ item.key }}"
+    exclusive: true
+    state: present
+  loop: "{{users}}"
+
+- name: "Passwordless Sudo"
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: "^%sudo"
+    line: "%sudo ALL=(ALL) NOPASSWD:ALL"
+    validate: "visudo -cf %s"

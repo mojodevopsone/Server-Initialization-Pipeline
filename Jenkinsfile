@@ -29,12 +29,7 @@ EOL
 
         stage('Run Ansible') {
             steps {
-                ansiblePlaybook(
-                    playbook: 'playbook.yml',
-                    inventory: 'inventory.ini',
-                    credentialsId: 'jenkins-sshkey',
-                    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
-                )
+                ansiblePlaybook become: true, credentialsId: 'jenkins-sshkey', disableHostKeyChecking: true, inventory: 'inventory.ini', playbook: 'playbook.yml'
             }
         }
     }
