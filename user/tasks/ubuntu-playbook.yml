@@ -9,7 +9,7 @@
     groups: sudo
     append: true
   loop: "{{ users }}"
-  when: ansible_facts['os_family'] == "ubuntu"
+  when: ansible_facts['os_family'] == "Ubuntu"
 
 - name: "Inject SSH Key"
   ansible.posix.authorized_key:
@@ -18,7 +18,7 @@
     exclusive: true
     state: present
   loop: "{{ users }}"
-  when: ansible_facts['os_family'] == "ubuntu"
+  when: ansible_facts['os_family'] == "Ubuntu"
 
 - name: "Passwordless Sudo"
   ansible.builtin.lineinfile:
@@ -27,4 +27,4 @@
     regexp: "^%sudo"
     line: "%sudo ALL=(ALL) NOPASSWD:ALL"
     validate: "visudo -cf %s"
-  when: ansible_facts['os_family'] == "ubuntu"
+  when: ansible_facts['os_family'] == "Ubuntu"
