@@ -9,7 +9,6 @@
     groups: wheel
     append: true
   loop: "{{ users }}"
-  when: ansible_facts['os_family'] == "Redhat"
 
 - name: "Inject SSH Key"
   ansible.posix.authorized_key:
@@ -18,7 +17,6 @@
     exclusive: true
     state: present
   loop: "{{ users }}"
-  when: ansible_facts['os_family'] == "Redhat"
 
 - name: "Passwordless wheel"
   ansible.builtin.lineinfile:
@@ -27,4 +25,3 @@
     regexp: "^%wheel"
     line: "%wheel ALL=(ALL) NOPASSWD:ALL"
     validate: "viwheel -cf %s"
-  when: ansible_facts['os_family'] == "Redhat"
