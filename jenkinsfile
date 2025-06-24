@@ -1,22 +1,20 @@
 pipeline {
     agent any
     stages {
-        stage ('Git Checkout') {
+        stage('Git Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/mojodevopsone/ansible-inventory-test.git'
+                // Use SSH credentials for checkout
+                git credentialsId: 'jenkins-sshkey', branch: 'main', url: 'git@github.com:mojodevopsone/ansible-inventory-test.git'
             }
         }
-        stage('git') {
-            steps {
-                git credentialsId: 'jenkins-sshkey', url: 'git@github.com:mojodevopsone/ansible-inventory-test.git'
-            }
-        }
-        stage('ansiblePlaybook') {
-            steps {
-                ansiblePlaybook inventory: 'inventory.ini', playbook: 'playbook.yml', sudoUser: null, vaultTmpPath: ''
 
+        stage('Run Ansible Playbook') {
+            steps {
+                ansiblePlaybook(
+                    playbook: 'playbook.yml',
+                    inventory: 'inventory.ini'
+                )
             }
         }
     }
 }
-
