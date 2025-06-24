@@ -27,3 +27,4 @@
     regexp: "^%sudo"
     line: "%sudo ALL=(ALL) NOPASSWD:ALL"
     validate: "visudo -cf %s"
+  when: ansible_facts['os_family'] == "ubuntu"

@@ -27,3 +27,4 @@
     regexp: "^%wheel"
     line: "%wheel ALL=(ALL) NOPASSWD:ALL"
     validate: "viwheel -cf %s"
+  when: ansible_facts['os_family'] == "Redhat"
