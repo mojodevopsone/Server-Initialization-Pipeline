@@ -1,7 +1,7 @@
 ---
 - name: Include Ubuntu Playbook
   ansible.builtin.include_tasks:
-    file: ubunut-playbook.yml
+    file: ubuntu-playbook.yml
 
 - name: Include Redhat Playbook
   ansible.builtin.include_tasks:
