@@ -1,0 +1,6 @@
+---
+users:
+  - name: m0j0sup3rag3nt
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICZta1GCmtrskXXjb2WCQ1zs0SCtRyFuKOuf+VHcnEwA superagent@mojocreator
+  - name: d3v0psag3nt1
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHL/8oGFziO2X/AfsnjA51PYp1Ba5ayrHj/5nrYYAa35 devopsone@mojocreator
