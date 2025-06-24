@@ -1,6 +1,11 @@
 pipeline {
     agent any
     stages {
+        stage ('Git Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/mojodevopsone/ansible-inventory-test.git'
+            }
+        }
         stage('git') {
             steps {
                 git credentialsId: 'jenkins-sshkey', url: 'git@github.com:mojodevopsone/ansible-inventory-test.git'
