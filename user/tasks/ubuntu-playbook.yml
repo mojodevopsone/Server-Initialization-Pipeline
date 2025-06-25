@@ -30,17 +30,17 @@
     line: "%sudo ALL=(ALL) NOPASSWD:ALL"
     validate: "visudo -cf %s"
 
-# - name: Disable IPv6 for the default interface
-#   ansible.posix.sysctl:
-#     name: "{{ item }}"
-#     value: "1"
-#     state: present
-#     reload: yes
-#   with_items:
-#     - net.ipv6.conf.default.disable_ipv6
-#     - net.ipv6.conf.all.disable_ipv6
-#     - net.ipv6.conf.eth0.disable_ipv6
-#     - net.ipv6.conf.lo.disable_ipv6
+- name: Disable IPv6 for the default interface
+  ansible.posix.sysctl:
+    name: "{{ item }}"
+    value: "1"
+    state: present
+    reload: yes
+  with_items:
+    - net.ipv6.conf.default.disable_ipv6
+    - net.ipv6.conf.all.disable_ipv6
+    - net.ipv6.conf.eth0.disable_ipv6
+    - net.ipv6.conf.lo.disable_ipv6
 
 - name: Ensure ipv6.disable=1 is in GRUB_CMDLINE_LINUX
   lineinfile:
@@ -50,7 +50,7 @@
     backrefs: no
 
 - name: Update GRUB configuration
-  command: update-grub
+  command: grub-mkconfig -o /boot/grub/grub.cfg
 # - name: Reboot machine and send a message
 #   ansible.builtin.reboot:
 #     msg: "Rebooting machine in 300 seconds"
