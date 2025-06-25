@@ -54,6 +54,9 @@
       ansible.builtin.shell: |
         grubby --args ipv6.disable=1 --update-kernel DEFAULT
       when: ipv6_status.stdout != "0"
+
+- name: Update GRUB configuration
+  command: grub-mkconfig -o /boot/grub/grub.cfg
 # - name: Reboot machine and send a message
 #   ansible.builtin.reboot:
 #     msg: "Rebooting machine in 5 seconds"
