@@ -1,6 +1,10 @@
 ---
 # tasks file for user
 
+- name: "apt-get update"
+  ansible.builtin.apt:
+    update_cache: yes
+
 - name: "Add user"
   ansible.builtin.user:
     name: "{{ item.name }}"
@@ -25,3 +29,28 @@
     regexp: "^%sudo"
     line: "%sudo ALL=(ALL) NOPASSWD:ALL"
     validate: "visudo -cf %s"
+
+# - name: Disable IPv6 for the default interface
+#   ansible.posix.sysctl:
+#     name: "{{ item }}"
+#     value: "1"
+#     state: present
+#     reload: yes
+#   with_items:
+#     - net.ipv6.conf.default.disable_ipv6
+#     - net.ipv6.conf.all.disable_ipv6
+#     - net.ipv6.conf.eth0.disable_ipv6
+#     - net.ipv6.conf.lo.disable_ipv6
+
+- name: Ensure ipv6.disable=1 is in GRUB_CMDLINE_LINUX
+  lineinfile:
+    path: /etc/default/grub
+    regexp: "^GRUB_CMDLINE_LINUX="
+    line: 'GRUB_CMDLINE_LINUX="ipv6.disable=1"'
+    backrefs: no
+
+- name: Update GRUB configuration
+  command: update-grub
+# - name: Reboot machine and send a message
+#   ansible.builtin.reboot:
+#     msg: "Rebooting machine in 300 seconds"

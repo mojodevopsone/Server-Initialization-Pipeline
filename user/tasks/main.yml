@@ -2,7 +2,7 @@
 - name: Include Ubuntu Playbook
   ansible.builtin.include_tasks:
     file: ubuntu-playbook.yml
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts['distribution'] == "Ubuntu"
 
 - name: Include Redhat Playbook
   ansible.builtin.include_tasks:
