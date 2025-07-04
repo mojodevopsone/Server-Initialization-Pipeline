@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'jenkins-sshkey', branch: 'main', url: 'git@github.com:mojodevopsone/ansible-inventory-test.git'
+                git credentialsId: 'jenkins-sshkey', branch: 'main', url: 'git@github.com:mojodevopsone/Server-Initialization-Pipeline.git'
             }
         }
 
